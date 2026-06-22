@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piedra Papel Tijera | Vercel Style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <a href="/" class="logo" aria-label="Inicio">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#171717"/>
+          <path d="M8 12h16M8 16h12M8 20h8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <nav class="nav">
+        <a href="#game" class="nav-link">Jugar</a>
+        <a href="#stats" class="nav-link">Estadísticas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="container">
+        <h1 class="hero-title">Piedra Papel Tijera</h1>
+        <p class="hero-subtitle">El clásico juego de mano. Juega contra la IA, rompe récords.</p>
+        <div class="hero-badges">
+          <span class="badge badge--session">Racha Sesión: <span id="session-streak-display">0</span></span>
+          <span class="badge badge--alltime">Récord Absoluto: <span id="alltime-streak-display">0</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="game" class="game-section">
+      <div class="container">
+        <div class="game-area">
+          <div class="score-board">
+            <div class="score-player">
+              <span class="score-label">Tú</span>
+              <span class="score-value" id="player-score">0</span>
+            </div>
+            <div class="score-vs">
+              <span class="vs-text">VS</span>
+            </div>
+            <div class="score-player">
+              <span class="score-label">IA</span>
+              <span class="score-value" id="ai-score">0</span>
+            </div>
+          </div>
+
+          <div class="choices-grid" role="group" aria-label="Elige tu jugada">
+            <button class="choice-btn" data-choice="rock" aria-label="Piedra">
+              <span class="choice-icon" aria-hidden="true">🪨</span>
+              <span class="choice-name">Piedra</span>
+              <span class="choice-key">1</span>
+            </button>
+            <button class="choice-btn" data-choice="paper" aria-label="Papel">
+              <span class="choice-icon" aria-hidden="true">📄</span>
+              <span class="choice-name">Papel</span>
+              <span class="choice-key">2</span>
+            </button>
+            <button class="choice-btn" data-choice="scissors" aria-label="Tijera">
+              <span class="choice-icon" aria-hidden="true">✂️</span>
+              <span class="choice-name">Tijera</span>
+              <span class="choice-key">3</span>
+            </button>
+          </div>
+
+          <div class="result-display" id="result-display" aria-live="polite">
+            <div class="result-choices">
+              <div class="result-choice player-choice">
+                <span class="result-choice-label">Tu elección</span>
+                <span class="result-choice-icon" id="player-choice-icon">—</span>
+              </div>
+              <div class="result-vs" aria-hidden="true">⚡</div>
+              <div class="result-choice ai-choice">
+                <span class="result-choice-label">Elección IA</span>
+                <span class="result-choice-icon" id="ai-choice-icon">—</span>
+              </div>
+            </div>
+            <div class="result-message" id="result-message">
+              Elige tu jugada para comenzar
+            </div>
+            <div class="result-streak" id="result-streak" hidden>
+              <span class="streak-label">Racha actual: </span>
+              <span class="streak-value" id="current-streak-value">0</span>
+            </div>
+          </div>
+
+          <div class="game-actions">
+            <button class="btn btn--primary" id="reset-btn" aria-label="Reiniciar juego">
+              Reiniciar Partida
+            </button>
+            <button class="btn btn--ghost" id="reset-stats-btn" aria-label="Borrar estadísticas">
+              Borrar Estadísticas
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats" class="stats-section">
+      <div class="container">
+        <h2 class="section-title">Estadísticas</h2>
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true">🏆</div>
+            <div class="stat-content">
+              <span class="stat-value" id="stat-wins">0</span>
+              <span class="stat-label">Victorias</span>
+            </div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true">💀</div>
+            <div class="stat-content">
+              <span class="stat-value" id="stat-losses">0</span>
+              <span class="stat-label">Derrotas</span>
+            </div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true">🤝</div>
+            <div class="stat-content">
+              <span class="stat-value" id="stat-draws">0</span>
+              <span class="stat-label">Empates</span>
+            </div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true">📊</div>
+            <div class="stat-content">
+              <span class="stat-value" id="stat-winrate">0%</span>
+              <span class="stat-label">Win Rate</span>
+            </div>
+          </article>
+          <article class="stat-card stat-card--highlight">
+            <div class="stat-icon" aria-hidden="true">🔥</div>
+            <div class="stat-content">
+              <span class="stat-value" id="stat-session-streak">0</span>
+              <span class="stat-label">Racha Sesión</span>
+            </div>
+          </article>
+          <article class="stat-card stat-card--highlight">
+            <div class="stat-icon" aria-hidden="true">👑</div>
+            <div class="stat-content">
+              <span class="stat-value" id="stat-alltime-streak">0</span>
+              <span class="stat-label">Récord Absoluto</span>
+            </div>
+          </article>
+        </div>
+
+        <details class="history-panel">
+          <summary class="history-toggle">Historial de partidas</summary>
+          <div class="history-list" id="history-list">
+            <p class="history-empty">No hay partidas registradas aún</p>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">Hecho con estilo <a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a> · Desplegado en Vercel</p>
+      <p class="footer-hint">Teclas: <kbd>1</kbd> Piedra · <kbd>2</kbd> Papel · <kbd>3</kbd> Tijera · <kbd>R</kbd> Reiniciar</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

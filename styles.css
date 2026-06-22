@@ -1,0 +1,514 @@
+/* Vercel-inspired design system for RPS game */
+
+/* CSS Custom Properties */
+:root {
+  --color-bg: #ffffff;
+  --color-text: #171717;
+  --color-muted: #4d4d4d;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-focus: hsla(212, 100%, 48%, 1);
+  --color-develop: #0a72ef;
+  --color-preview: #de1d8d;
+  --color-ship: #ff5b4f;
+  --color-white: #ffffff;
+  --color-gray-100: #ebebeb;
+  --color-gray-50: #fafafa;
+}
+
+/* Global styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Header */
+.header {
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-gray-100);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: var(--color-gray-50);
+}
+
+/* Hero section */
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  background-color: var(--color-bg);
+}
+
+.hero-title {
+  font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-gray-50);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--color-gray-100);
+}
+
+/* Game section */
+.game-section {
+  padding: 4rem 0;
+}
+
+.game-area {
+  background-color: var(--color-bg);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.04) 0px 2px 2px,
+    #fafafa 0px 0px 0px 1px;
+}
+
+.score-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.score-player {
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: 0.25rem;
+}
+
+.score-value {
+  font-size: 2.5rem;
+  font-weight: 600;
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+.score-vs {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.choices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.choice-btn {
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 6px;
+  padding: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.04) 0px 2px 2px;
+  font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.choice-btn:hover {
+  background-color: var(--color-gray-50);
+  transform: translateY(-2px);
+  box-shadow: 
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.04) 0px 4px 4px,
+    #fafafa 0px 0px 0px 1px;
+}
+
+.choice-btn:active {
+  transform: translateY(0);
+}
+
+.choice-icon {
+  font-size: 2.5rem;
+}
+
+.choice-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.choice-key {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+.result-display {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--color-gray-50);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.result-choices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.result-choice {
+  text-align: center;
+}
+
+.result-choice-label {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: 0.25rem;
+}
+
+.result-choice-icon {
+  font-size: 3rem;
+  min-width: 3rem;
+  display: inline-block;
+}
+
+.result-vs {
+  font-size: 2rem;
+}
+
+.result-message {
+  font-size: 1.125rem;
+  font-weight: 500;
+  min-height: 2.5rem;
+}
+
+.result-streak {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-top: 1rem;
+}
+
+.streak-label {
+  font-weight: 500;
+}
+
+.streak-value {
+  font-weight: 600;
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+.game-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.btn--primary {
+  background-color: var(--color-text);
+  color: var(--color-white);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-muted);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-gray-100);
+}
+
+.btn--ghost:hover {
+  background-color: var(--color-gray-50);
+}
+
+/* Stats section */
+.stats-section {
+  padding: 4rem 0;
+  background-color: var(--color-gray-50);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.025em;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.04) 0px 2px 2px,
+    #fafafa 0px 0px 0px 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat-card--highlight {
+  border-left: 3px solid var(--color-ship);
+}
+
+.stat-icon {
+  font-size: 2rem;
+}
+
+.stat-content {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.history-panel {
+  margin-top: 2rem;
+  background-color: var(--color-white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.04) 0px 2px 2px,
+    #fafafa 0px 0px 0px 1px;
+}
+
+.history-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-gray-50);
+  border: none;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.history-toggle:hover {
+  background-color: var(--color-gray-100);
+}
+
+.history-toggle::after {
+  content: "▼";
+  transition: transform 0.2s;
+}
+
+.history-panel[open] .history-toggle::after {
+  transform: rotate(180deg);
+}
+
+.history-list {
+  padding: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-empty {
+  color: var(--color-muted);
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid var(--color-gray-100);
+  margin-top: auto;
+}
+
+.footer-text {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.footer-hint {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin-top: 0.5rem;
+}
+
+.footer-text a {
+  color: var(--color-develop);
+  text-decoration: none;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.25rem;
+  }
+  
+  .choices-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .score-board {
+    flex-direction: column;
+  }
+  
+  .score-vs {
+    margin: 1rem 0;
+  }
+  
+  .result-choices {
+    flex-direction: column;
+  }
+  
+  .result-vs {
+    margin: 1rem 0;
+  }
+  
+  .game-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.875rem;
+  }
+  
+  .choices-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
